@@ -9,9 +9,9 @@
     body {
         margin: 0;
         overflow: hidden;
-        background: white;
+        background: black;
     }
- 
+
     img {
         position: absolute;
         width: 100%;
@@ -26,13 +26,13 @@
         opacity: 1;
     }
 
-/* Barre de progression */
+    /* Barre de progression */
     #progress-container {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 50px;
+        height: 12px;
         background: rgba(255,255,255,0.15);
         z-index: 9999;
     }
@@ -51,21 +51,48 @@
 <img src="images/image2.png">
 <img src="images/image3.png">
 
+<!-- Barre de progression -->
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
 <script>
 const images = document.querySelectorAll("img");
+const progressBar = document.getElementById("progress-bar");
+
 let current = 0;
 
-setInterval(() => {
+const duration = 15000; // 15 secondes
+
+function startProgressBar() {
+    progressBar.style.transition = "none";
+    progressBar.style.width = "0%";
+
+    setTimeout(() => {
+        progressBar.style.transition = `width ${duration}ms linear`;
+        progressBar.style.width = "100%";
+    }, 50);
+}
+
+function nextImage() {
     images[current].classList.remove("active");
 
     current = (current + 1) % images.length;
 
     images[current].classList.add("active");
-}, 15000);
 
+    startProgressBar();
+}
+
+startProgressBar();
+
+setInterval(nextImage, duration);
+
+// Refresh auto toutes les 15 minutes
 setInterval(() => {
     location.reload();
 }, 900000);
+
 </script>
 
 </body>
