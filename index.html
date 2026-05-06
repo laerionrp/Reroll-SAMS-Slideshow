@@ -9,7 +9,7 @@
     body {
         margin: 0;
         overflow: hidden;
-        background: red;
+        background: white;
     }
  
     img {
@@ -19,6 +19,7 @@
         object-fit: contain;
         opacity: 0;
         transition: opacity 1s;
+        z-index: 1;
     }
 
     img.active {
@@ -31,9 +32,9 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 10px;
+        height: 50px;
         background: rgba(255,255,255,0.15);
-        z-index: 10;
+        z-index: 9999;
     }
 
     #progress-bar {
